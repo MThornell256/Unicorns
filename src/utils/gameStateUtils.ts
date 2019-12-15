@@ -3,51 +3,35 @@ import { CardType } from "../model/cardType";
 import { GameState } from "../model/gameState";
 import { Player } from "../model/player";
 
-export const getCurrentPlayer = (gameState: GameState): Player => {
+export const getCurrentPlayerId = (gameState: GameState): number => {
 
-    const playerIndex = gameState.turn % gameState.players.length
-    return gameState.players[playerIndex]
+    return gameState.turn % gameState.players.length
 }
 
-export const getCardInStable = (player: Player, cardName: string): Card | null => {
-
-    const results = player.stable.filter(c => c.name === cardName)
-    if(results.length)
-      return results[0]
-
-    return null
+export const getPlayer = (gameState: GameState, playerId: number): Player => {
+    return gameState.players[playerId]
 }
 
-export const getCardCountInStable = (player: Player, cardName: string): number => {
+export const getCardInHand = (gameState: GameState, playerId: number, cardId: number, remove = false): Card | undefined => {
 
-    return player.stable.filter(c => c.name === cardName).length
+    const card = getPlayer(gameState, playerId).hand.find(card => card.id === cardId)
+
+    if(card && remove) {
+        getPlayer(gameState, playerId).hand = getPlayer(gameState, playerId).hand.filter(card => card.id !== cardId)
+    }
+
+    return card
 }
 
-export const getCardInHand = (player: Player, cardName: string): Card | null => {
+export const getCardInStable = (gameState: GameState, playerId: number, cardId: number, remove = false): Card | undefined => {
 
-    const results = player.hand.filter(c => c.name === cardName)
-    if(results.length)
-      return results[0]
+    const card = getPlayer(gameState, playerId).stable.find(card => card.id === cardId)
 
-    return null
-}
+    if(card && remove) {
+        getPlayer(gameState, playerId).stable = getPlayer(gameState, playerId).stable.filter(card => card.id !== cardId)
+    }
 
-export const removeCardHand = (player: Player, cardName: string) => {
-    
-    const index = player.hand.findIndex(card => card.name === cardName)
-    player.hand.splice(index, 1)
-}
-
-export const removeCardStable = (player: Player, cardName: string) => {
-    
-    const index = player.stable.findIndex(card => card.name === cardName)
-    if(index > -1)
-        player.hand.splice(index, 1)
-}
-
-export const getCardCountInHand = (player: Player, cardName: string): number => {
-
-    return player.hand.filter(c => c.name === cardName).length
+    return card
 }
 
 export const isUnicorn = (card: Card): boolean => {
@@ -55,4 +39,10 @@ export const isUnicorn = (card: Card): boolean => {
     return card.cardType === CardType.UNICORN_BABY  ||
            card.cardType === CardType.UNICORN_BASIC ||
            card.cardType === CardType.UNICORN_MAGIC 
+}
+
+export const isUpgradeDowngrade = (card: Card): boolean => {
+
+    return card.cardType === CardType.UPGRADE ||
+           card.cardType === CardType.DOWNGRADE
 }

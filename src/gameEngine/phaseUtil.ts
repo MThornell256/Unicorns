@@ -29,3 +29,7 @@ export const NextPhase = (gameState: GameState): GameState => {
 
     return gameState
 }
+
+export const Discard = (cardId: number) => {
+
+}

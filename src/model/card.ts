@@ -1,28 +1,33 @@
+import { CardAbility } from '../gameEngine/playAbility';
 import { CardType } from "./cardType";
-import { GameAction } from "./gameAction";
 import { GameState } from "./gameState";
 
 export interface Card
 {
-    cardId: string,
-    cardType: CardType,
+    id?: number,         // unique for each card in the deck
+    name: string,       // unique for each card in the deck with the same name
+    cardType: CardType, // cardType: the category of this card
 
-    name: string,
+    displayName: string,
     description: string,
 
-    // Unicorn Ability
-    startOfTurnAbility?: (gameState: GameState) => GameState,
-    
-    enterStableAbility?: (gameState: GameState) => GameState,
-    //activatedAbility?: (gameState: GameState) => GameState,
-    
+    // Magic Unicorn Abilities
+    startOfTurnAbility?: CardAbility,
+    enterStableAbility?: CardAbility,
 
-    // Given an action; is it allowed to be played?
-    validateAction?: (gameAction: GameAction) => boolean,
+    // Magic Card Ability
+    magicAbility?: CardAbility
 
-    // Apply any modifiers to the game state
-    applyModifiers?: (gameState: GameState) => GameState,
-    
-    // Play the action on this card
-    playAction?: (gameState: GameState) => GameState,
+    // Instant Ability
+    instantAbility?: CardAbility
+
+    // Upgrade/Downgrade Modifier
+    modifier?: Modifier
+}
+
+export interface Modifier
+{
+    enforcePlay: boolean,                        // This ability must be played; there is no opt-out
+    validate: (gameState: GameState) => boolean, // can this modifier be applied
+    apply: (gameState: GameState) => GameState   // apply the modifier
 }

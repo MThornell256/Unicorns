@@ -1,7 +1,7 @@
 import { GameState } from "../model/gameState";
 import { TurnPhase } from "../model/turnPhase";
-import { Card } from "../model/card";
-import { getCurrentPlayer } from "../utils/gameStateUtils";
+import { DrawCard } from './basicActions';
+import { getCurrentPlayerId } from '../utils/gameStateUtils';
 
 export const DrawPhase = (gameState: GameState): GameState => {
 
@@ -9,15 +9,9 @@ export const DrawPhase = (gameState: GameState): GameState => {
     if(gameState.turnPhase !== TurnPhase.DRAW) {
         throw Error('Invalid Phase')
     }
-    
-    // Draw Card From Deck
-    const newCard = gameState.deck.pop() as Card
 
-    // Add To Current Players Hand
-    const currentPlayer = getCurrentPlayer(gameState)
-    console.log('currentPlayer', currentPlayer)
-
-    currentPlayer.hand.push(newCard)
+    const currentPlayerId = getCurrentPlayerId(gameState)
+    DrawCard(gameState, currentPlayerId)
 
     return gameState
 }

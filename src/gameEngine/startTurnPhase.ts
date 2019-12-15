@@ -1,29 +1,32 @@
 import { GameState } from "../model/gameState";
 import { TurnPhase } from "../model/turnPhase";
-import { getCurrentPlayer, getCardInStable } from "../utils/gameStateUtils";
-import { Card } from "../model/card";
+import { getCardInStable, getCurrentPlayerId } from '../utils/gameStateUtils';
+import { CardAbilityParameters, ExecuteAbility, ValidateAbiltiyParams } from './playAbility';
 
-export interface StartTurnPhaseAction {
-    cardName: string
-}
+export const StartTurnPhase = (gameState: GameState, cardId: number, actionParams: CardAbilityParameters): GameState => {
 
-export const StartTurnPhase = (gameState: GameState, startTurnPhaseAction:StartTurnPhaseAction): GameState => {
-
+    //const { targetPlayerId } = actionParams
+    const playerId = getCurrentPlayerId(gameState)
+    
     // Validate Phase
     if(gameState.turnPhase !== TurnPhase.TURN_START) {
         throw Error('Invalid Phase')
     }
 
-    const currentPlayer = getCurrentPlayer(gameState)
-    const card = getCardInStable(currentPlayer, startTurnPhaseAction.cardName)
+    const card = getCardInStable(gameState, playerId, cardId)
 
     if(!card) {
-        throw Error('Invalid Move: Player Does Not Have Card In Stable')
+        throw Error("Unable To Play Card; Card Is Not In Players Stable")
     }
 
-    if(!card.startOfTurnAbility) {
-        throw Error('Invalid Move: Card Does Not Have Start Of Turn Ability')
+    if(card.startOfTurnAbility && (actionParams.playAbility || card.startOfTurnAbility.enforcePlay)) {
+
+        if(!ValidateAbiltiyParams(card.startOfTurnAbility, actionParams)) {
+            throw Error("Start of turn ability params did not validate")
+        }
+
+        ExecuteAbility(gameState, card.startOfTurnAbility, actionParams)
     }
 
-    return card.startOfTurnAbility(gameState)
+    return gameState
 }
