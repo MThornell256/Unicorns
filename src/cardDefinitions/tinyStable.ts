@@ -1,5 +1,6 @@
 import { Card } from "../model/card";
 import { CardType } from "../model/cardType";
+import { gameBuilder } from '../utils/gameBuilder';
 
 const tinyStable: Card = {
     
@@ -25,4 +26,8 @@ const tinyStable: Card = {
     }*/
 }
 
-export default tinyStable
+// Add card to game builder
+gameBuilder.registerCardDefinition({
+    countInDeck: 1,
+    card: tinyStable
+})
