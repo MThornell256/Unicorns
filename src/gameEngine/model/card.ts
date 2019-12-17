@@ -1,4 +1,4 @@
-import { CardAbility } from '../gameEngine/cardAbility';
+import { CardAbility } from '../cardAbility';
 import { CardType } from "./cardType";
 import { GameState } from "./gameState";
 

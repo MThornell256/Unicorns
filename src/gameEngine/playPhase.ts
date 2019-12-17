@@ -1,6 +1,6 @@
-import { CardType } from '../model/cardType';
-import { GameState } from "../model/gameState";
-import { TurnPhase } from "../model/turnPhase";
+import { CardType } from './model/cardType';
+import { GameState } from "./model/gameState";
+import { TurnPhase } from "./model/turnPhase";
 import { getCardInHand, getCurrentPlayerId, getPlayer, isUnicorn, isUpgradeDowngrade } from '../utils/gameStateUtils';
 import { CardAbilityParameters, ExecuteAbility, ValidateAbiltiyParams } from './cardAbility';
 

@@ -1,6 +1,6 @@
 import { GameState } from "../model/gameState";
 import { TurnPhase } from "../model/turnPhase";
-import { getPlayer, getCurrentPlayerId } from '../utils/gameStateUtils';
+import { getPlayer, getCurrentPlayerId } from '../../utils/gameStateUtils';
 
 export const NextPhase = (gameState: GameState): GameState => {
 

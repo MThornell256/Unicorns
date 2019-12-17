@@ -1,7 +1,7 @@
-import { Card } from "../model/card";
-import { CardType } from "../model/cardType";
-import { GameState } from "../model/gameState";
-import { Player } from "../model/player";
+import { Card } from "../gameEngine/model/card";
+import { CardType } from "../gameEngine/model/cardType";
+import { GameState } from "../gameEngine/model/gameState";
+import { Player } from "../gameEngine/model/player";
 
 export const getCurrentPlayer = (gameState: GameState): Player => {
     return getPlayer(gameState, getCurrentPlayerId(gameState))

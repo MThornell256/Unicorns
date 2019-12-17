@@ -1,5 +1,5 @@
-import { GameState } from '../model/gameState'
-import { CardData, Card } from '../model/card'
+import { GameState } from './model/gameState'
+import { CardData, Card } from './model/card'
 import { getPlayer } from '../utils/gameStateUtils'
 import { CardAbilityData } from './cardAbility'
 

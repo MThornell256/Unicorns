@@ -14,14 +14,3 @@ export interface GameState
     deck: Card[],
     discard: Card[]
 }
-
-// export interface TurnState
-// {
-//     requiresPlays: number,
-
-//     requiresDraw: number,
-
-//     requiresDiscards: number,
-//     requiresDestroy: number,
-//     requiresSacrifice: number,
-// }

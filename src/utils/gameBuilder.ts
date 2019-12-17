@@ -1,8 +1,8 @@
-import { Card } from '../model/card';
-import { CardType } from '../model/cardType';
-import { GameState } from '../model/gameState';
-import { Player } from "../model/player";
-import { TurnPhase } from '../model/turnPhase';
+import { Card } from '../gameEngine/model/card';
+import { CardType } from '../gameEngine/model/cardType';
+import { GameState } from '../gameEngine/model/gameState';
+import { Player } from "../gameEngine/model/player";
+import { TurnPhase } from '../gameEngine/model/turnPhase';
 
 const STARTING_CARDS = 5
 

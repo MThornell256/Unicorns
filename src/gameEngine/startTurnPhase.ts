@@ -1,5 +1,5 @@
-import { GameState } from "../model/gameState";
-import { TurnPhase } from "../model/turnPhase";
+import { GameState } from "./model/gameState";
+import { TurnPhase } from "./model/turnPhase";
 import { getCardInStable, getCurrentPlayerId } from '../utils/gameStateUtils';
 import { CardAbilityParameters, ExecuteAbility, ValidateAbiltiyParams } from './cardAbility';
 

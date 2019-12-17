@@ -1,11 +1,10 @@
-import { DrawCard } from '../gameEngine/basicActions';
 import { CardAbilityParameters } from "../gameEngine/cardAbility";
-import { Card } from "../model/card";
-import { CardType } from "../model/cardType";
-import { GameState } from '../model/gameState';
+import { Card } from "../gameEngine/model/card";
+import { CardType } from "../gameEngine/model/cardType";
+import { GameState } from '../gameEngine/model/gameState';
+import { CardTypeOptions, PlayerDiscard } from '../gameEngine/model/player';
 import { gameBuilder } from '../utils/gameBuilder';
 import { getCurrentPlayerId, getPlayer } from '../utils/gameStateUtils';
-import { PlayerDiscard, CardTypeOptions } from '../model/player';
 
 const unicornOnTheCob: Card = {
     

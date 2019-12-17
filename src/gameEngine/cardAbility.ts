@@ -1,4 +1,4 @@
-import { GameState } from '../model/gameState'
+import { GameState } from './model/gameState'
 
 export interface CardAbilityData
 {

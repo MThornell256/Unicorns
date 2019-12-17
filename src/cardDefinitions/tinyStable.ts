@@ -1,5 +1,5 @@
-import { Card } from "../model/card";
-import { CardType } from "../model/cardType";
+import { Card } from "../gameEngine/model/card";
+import { CardType } from "../gameEngine/model/cardType";
 import { gameBuilder } from '../utils/gameBuilder';
 
 const tinyStable: Card = {
