@@ -1,7 +1,7 @@
 import { GameState } from "../model/gameState";
 import { TurnPhase } from "../model/turnPhase";
 import { getCardInStable, getCurrentPlayerId } from '../utils/gameStateUtils';
-import { CardAbilityParameters, ExecuteAbility, ValidateAbiltiyParams } from './playAbility';
+import { CardAbilityParameters, ExecuteAbility, ValidateAbiltiyParams } from './cardAbility';
 
 export const StartTurnPhase = (gameState: GameState, cardId: number, actionParams: CardAbilityParameters): GameState => {
 

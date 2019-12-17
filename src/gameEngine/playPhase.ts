@@ -2,7 +2,7 @@ import { CardType } from '../model/cardType';
 import { GameState } from "../model/gameState";
 import { TurnPhase } from "../model/turnPhase";
 import { getCardInHand, getCurrentPlayerId, getPlayer, isUnicorn, isUpgradeDowngrade } from '../utils/gameStateUtils';
-import { CardAbilityParameters, ExecuteAbility, ValidateAbiltiyParams } from './playAbility';
+import { CardAbilityParameters, ExecuteAbility, ValidateAbiltiyParams } from './cardAbility';
 
 export const PlayPhase = (gameState: GameState, cardId: number, actionParams: CardAbilityParameters): GameState => {
 
@@ -55,8 +55,8 @@ export const PlayPhase = (gameState: GameState, cardId: number, actionParams: Ca
         throw Error("This Card Type Can Not Be Played At This Time")
     }
 
-    // Remove card from hand
-    getCardInHand(gameState, playerId, cardId, true)
+    // TODO: Remove card from hand
+    //getCardInHand(gameState, playerId, cardId, true)
 
     return gameState
 }

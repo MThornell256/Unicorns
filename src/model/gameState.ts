@@ -6,7 +6,7 @@ export interface GameState
 {
     turn: number,
     turnPhase: TurnPhase,
-    turnState: TurnState,
+    //turnState: TurnState,
 
     isModified: boolean,
 
@@ -15,9 +15,13 @@ export interface GameState
     discard: Card[]
 }
 
-export interface TurnState
-{
-    cardsDrawn: number,
-    cardsPlayed: number,
-    cardsDiscarded: number,
-}
+// export interface TurnState
+// {
+//     requiresPlays: number,
+
+//     requiresDraw: number,
+
+//     requiresDiscards: number,
+//     requiresDestroy: number,
+//     requiresSacrifice: number,
+// }

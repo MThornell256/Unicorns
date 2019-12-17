@@ -61,9 +61,9 @@ class GameBuilder {
         const gameState: GameState = {
             isModified: false,
             turn: 0,
-            turnState: { cardsDrawn: 0,
-                cardsPlayed: 0,
-                cardsDiscarded: 0},
+            // turnState: { cardsDrawn: 0,
+            //     cardsPlayed: 0,
+            //     cardsDiscarded: 0},
             turnPhase: TurnPhase.TURN_START,
             deck: this.createDeck(),
             discard: [],
@@ -87,7 +87,16 @@ class GameBuilder {
         return {
             name,
             hand: [],
-            stable: []
+            stable: [],
+
+            requiredActions: {
+                draw: 0,
+                drawNursery: 0,
+                play: 0,
+                discard: [],
+                destroy: [],
+                sacrifice: [],
+            }
         }
     }
 

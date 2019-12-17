@@ -8,7 +8,7 @@ const tinyStable: Card = {
     displayName: "Tiny Stable",
     description: '',
     cardType: CardType.DOWNGRADE,
-    
+
     /*
     validateAction: (action: GameAction): boolean => {
 

@@ -14,13 +14,6 @@ export const EndTurnPhase = (gameState: GameState): GameState => {
     if(currentPlayer.hand.length > 7) {
         throw Error('Too many cards in hand to end turn')
     }
-    
-    // Reset turn state
-    gameState.turnState = {
-        cardsDrawn: 0,
-        cardsPlayed: 0,
-        cardsDiscarded: 0,
-    }
 
     return gameState
 }

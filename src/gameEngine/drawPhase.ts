@@ -1,13 +1,11 @@
-import { GameState } from "../model/gameState";
-import { TurnPhase } from "../model/turnPhase";
-import { DrawCard } from './basicActions';
-import { getCurrentPlayerId } from '../utils/gameStateUtils';
+// import { GameState } from "../model/gameState";
+// import { getCurrentPlayerId } from '../utils/gameStateUtils';
+// import { DrawCard, DiscardCard } from './basicActions';
+/*
+export const Draw = (gameState: GameState): GameState => {
 
-export const DrawPhase = (gameState: GameState): GameState => {
-
-    // Validate Phase
-    if(gameState.turnPhase !== TurnPhase.DRAW) {
-        throw Error('Invalid Phase')
+    if(gameState.turnState.requiresDraw <= 0) {
+        throw Error('Unable To Draw')
     }
 
     const currentPlayerId = getCurrentPlayerId(gameState)
@@ -15,3 +13,15 @@ export const DrawPhase = (gameState: GameState): GameState => {
 
     return gameState
 }
+
+export const Discard = (gameState: GameState, cardId: number): GameState => {
+
+    if(gameState.turnState.requiresDiscards <= 0) {
+        throw Error('Unable To Discard')
+    }
+
+    const currentPlayerId = getCurrentPlayerId(gameState)
+    DiscardCard(gameState, currentPlayerId)
+
+    return gameState
+}*/
