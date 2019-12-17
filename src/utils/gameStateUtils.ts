@@ -27,6 +27,19 @@ export const getCardInHand = (gameState: GameState, playerId: number, cardId: nu
     return card
 }
 
+export const removeCardInHand = (gameState: GameState, playerId: number, cardId: number): Card | undefined => {
+
+    const card = getPlayer(gameState, playerId).hand.find(card => card.id === cardId)
+
+    if(card) {
+        getPlayer(gameState, playerId).hand = getPlayer(gameState, playerId).hand.filter(card => card.id !== cardId)
+    } else {
+        throw Error("Player Does Not Have This Card In Hand")
+    }
+
+    return card
+}
+
 export const getCardInStable = (gameState: GameState, playerId: number, cardId: number): Card | undefined => {
 
     const card = getPlayer(gameState, playerId).stable.find(card => card.id === cardId)
@@ -34,6 +47,19 @@ export const getCardInStable = (gameState: GameState, playerId: number, cardId: 
     // if(card && remove) {
     //     getPlayer(gameState, playerId).stable = getPlayer(gameState, playerId).stable.filter(card => card.id !== cardId)
     // }
+
+    return card
+}
+
+export const removeCardInStable = (gameState: GameState, playerId: number, cardId: number): Card | undefined => {
+
+    const card = getPlayer(gameState, playerId).stable.find(card => card.id === cardId)
+
+    if(card) {
+        getPlayer(gameState, playerId).stable = getPlayer(gameState, playerId).stable.filter(card => card.id !== cardId)
+    } else {
+        throw Error("Player Does Not Have This Card In Stable")
+    }
 
     return card
 }

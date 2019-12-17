@@ -3,18 +3,18 @@ import { GameState } from './model/gameState'
 export interface CardAbilityData
 {
     enforcePlay?: boolean,             // This ability must be played; there is no opt-out
-    requiresTargetPlayers?: boolean,   // This ability requires a target player
+    requiresTargetPlayer?: boolean,   // This ability requires a target player
     
     requiresTargetCards?: number,
     requiresTargetCardsToDestroy?: number,
     requiresTargetCardsToSacrifice?: number,
 
-    execute: (gameState: GameState, params: CardAbilityParameters) => GameState
+    //execute: (gameState: GameState, params: CardAbilityParameters) => GameState
 }
 
 export interface CardAbility extends CardAbilityData {
 
-    execute: (gameState: GameState, params: CardAbilityParameters) => GameState
+    execute: (gameState: GameState, params: any) => GameState
 }
 
 export interface CardAbilityParameters
@@ -29,7 +29,7 @@ export interface CardAbilityParameters
 
 export const ValidateAbiltiyParams = (ability: CardAbility, params: CardAbilityParameters): boolean =>  {
 
-    if(ability.requiresTargetPlayers && params.targetPlayerId === undefined) {
+    if(ability.requiresTargetPlayer && params.targetPlayerId === undefined) {
         return false
     }
 
