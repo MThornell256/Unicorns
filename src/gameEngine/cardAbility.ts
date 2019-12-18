@@ -3,13 +3,11 @@ import { GameState } from './model/gameState'
 export interface CardAbilityData
 {
     enforcePlay?: boolean,             // This ability must be played; there is no opt-out
-    requiresTargetPlayer?: boolean,   // This ability requires a target player
+    requiresTargetPlayer?: boolean,    // This ability requires a target player
     
     requiresTargetCards?: number,
     requiresTargetCardsToDestroy?: number,
     requiresTargetCardsToSacrifice?: number,
-
-    //execute: (gameState: GameState, params: CardAbilityParameters) => GameState
 }
 
 export interface CardAbility extends CardAbilityData {

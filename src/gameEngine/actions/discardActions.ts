@@ -1,38 +1,71 @@
+import { TransferCard } from "../../utils/cardCollection";
+import { matchCardTypeOptions } from "../../utils/cardTypeOptionsCollection";
+import { getCardInHand, getCardInStable, getPlayer } from '../../utils/gameStateUtils';
 import { GameState } from "../model/gameState";
-import { getCardInHand, getCardInStable, getCurrentPlayerId, getPlayer } from '../../utils/gameStateUtils';
 
-const Discard = (gameState: GameState, playerId: number, cardId: number, fromHand: boolean) => {
+export const Discard = (gameState: GameState, playerId: number, cardId: number) => {
 
-    const currentPlayer = getPlayer(gameState, getCurrentPlayerId(gameState))
+    const player = getPlayer(gameState, playerId)
+    const targetCard = getCardInHand(gameState, playerId, cardId)
 
-    if(currentPlayer.requiredActions.discard.length < 0) {
-        throw Error('Player Can Not Discard')
+    if(!targetCard) {
+        throw Error('Player does not have card')
     }
 
-    const card = fromHand
-        ? getCardInHand(gameState, playerId, cardId)
-        : getCardInStable(gameState, playerId, cardId)
+    // Does Player Have Discards Allowed
+    const match = matchCardTypeOptions(player.requiredActions.discard, targetCard.cardType)
+    if(!match) {
+        throw Error('Player can not remove this card type')
+    }
 
-    if(!card) {
-        throw Error('Player Does Not Have Card In Hand')
-    } 
+    // remove the action requirement
+    const index = player.requiredActions.discard.findIndex(op => op == match)
+    player.requiredActions.discard.splice(index, 1)
 
-    //TODO discard Type -- at the moment types are not enforced
-    currentPlayer.requiredActions.discard.pop()
-
-    gameState.discard.push(card)
+    TransferCard(player.hand, gameState.discard, targetCard.id as number)
 }
 
-// Discard: Send a card from 'your hand' to the discard pile
-export const DiscardFromHand = (gameState: GameState, playerId: number, cardId: number) => {
+export const Sacrifice = (gameState: GameState, playerId: number, cardId: number) => {
 
-    return Discard(gameState, playerId, cardId, true)
+    const player = getPlayer(gameState, playerId)
+    const targetCard = getCardInStable(gameState, playerId, cardId)
+
+    if(!targetCard) {
+        throw Error('Player does not have card')
+    }
+
+    // Does Player Have Discards Allowed
+    const match = matchCardTypeOptions(player.requiredActions.sacrifice, targetCard.cardType)
+    if(!match) {
+        throw Error('Player can not remove this card type')
+    }
+
+    // remove the action requirement
+    const index = player.requiredActions.sacrifice.findIndex(op => op == match)
+    player.requiredActions.sacrifice.splice(index, 1)
+
+    TransferCard(player.stable, gameState.discard, targetCard.id as number)
 }
 
-// Sacrifice: Send a card in 'your Stable' to the discard pile.
-// Destroy: Send a card from 'another players stable' to the discard pile.
-export const DiscardFromStable = (gameState: GameState, playerId: number, cardId: number) => {
+export const Destroy = (gameState: GameState, playerId: number, targetPlayerId: number, cardId: number) => {
 
-    return Discard(gameState, playerId, cardId, false)
+    const player = getPlayer(gameState, playerId)
+    const targetPlayer = getPlayer(gameState, targetPlayerId)
+    const targetCard = getCardInStable(gameState, targetPlayerId, cardId)
+
+    if(!targetCard) {
+        throw Error('Player does not have card')
+    }
+
+    // Does Player Have Discards Allowed
+    const match = matchCardTypeOptions(player.requiredActions.destroy, targetCard.cardType)
+    if(!match) {
+        throw Error('Player can not remove this card type')
+    }
+
+    // remove the action requirement
+    const index = player.requiredActions.destroy.findIndex(op => op == match)
+    player.requiredActions.destroy.splice(index, 1)
+
+    TransferCard(targetPlayer.stable, gameState.discard, targetCard.id as number)
 }
-
